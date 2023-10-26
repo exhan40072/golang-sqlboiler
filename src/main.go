@@ -2,12 +2,14 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"golang-sqlboiler/mysql"
 	"golang-sqlboiler/mysql/repository"
 )
 
 func main() {
-	db := mysql.GetDBInstance()
+	db := mysql.NewDB()
 	jets := repository.NewJets(db)
-	jets.FetchAll(context.Background())
+	str := jets.FetchAll(context.Background())
+	fmt.Println(str)
 }

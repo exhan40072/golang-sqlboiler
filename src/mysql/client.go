@@ -9,6 +9,7 @@ import (
 	"time"
 
 	"github.com/go-sql-driver/mysql"
+	"github.com/volatiletech/sqlboiler/v4/boil"
 )
 
 var (
@@ -16,14 +17,13 @@ var (
 	once     sync.Once
 )
 
-// GetDBInstance returns a new DBConnection.
-func GetDBInstance() *sql.DB {
+// getDBInstance returns a new DBConnection.
+func getDBInstance() *sql.DB {
 	once.Do(func() {
 		loc, err := time.LoadLocation("Local")
 		if err != nil {
 			slog.Warn("failed to exec time.LoadLocation().", "error", err)
 		}
-
 		c := mysql.Config{
 			User:                 env.MySQLUser(),
 			Passwd:               env.MySQLPass(),
@@ -35,7 +35,6 @@ func GetDBInstance() *sql.DB {
 			Loc:                  loc,
 			AllowNativePasswords: true,
 		}
-
 		db, err := sql.Open("mysql", c.FormatDSN())
 		if err != nil {
 			slog.Error("failed to exec sql.Open().", err)
@@ -45,6 +44,7 @@ func GetDBInstance() *sql.DB {
 			slog.Error("failed to exec db.Ping().", err)
 			panic(err)
 		}
+		boil.SetDB(db)
 		instance = db
 	})
 	return instance

@@ -6,7 +6,7 @@ CREATE TABLE IF NOT EXISTS pilots (
     PRIMARY KEY (`id`)
 );
 
-INSERT INTO pilots (name) VALUES ("Crohaco");
+INSERT INTO pilots (name) VALUES ("pilotname1");
 
 -- +migrate Down
 DROP TABLE IF EXISTS pilots;
