@@ -1,7 +1,13 @@
 package main
 
-import "fmt"
+import (
+	"context"
+	"golang-sqlboiler/mysql"
+	"golang-sqlboiler/mysql/repository"
+)
 
 func main() {
-	fmt.Println("hello, world!")
+	db := mysql.GetDBInstance()
+	jets := repository.NewJets(db)
+	jets.FetchAll(context.Background())
 }
