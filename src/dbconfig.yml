@@ -1,0 +1,4 @@
+development:
+    dialect: mysql
+    datasource: ${MYSQL_USER}:${MYSQL_ROOT_PASSWORD}@tcp(rdb)/d3?parseTime=true
+    dir: ./mysql/migrations

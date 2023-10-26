@@ -1,0 +1,15 @@
+output: mysql/models
+pkgname: models
+wipe: 'true'
+no-tests: 'true'
+
+mysql:
+  dbname: d3
+  host: rdb
+  port: 3306
+  user: root
+  pass: root
+  sslmode: 'false'
+  whitelist:
+    - jets
+    - pilots
