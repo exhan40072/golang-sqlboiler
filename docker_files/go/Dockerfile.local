@@ -1,0 +1,5 @@
+FROM  golang:1.21.0
+
+WORKDIR /go/app
+
+RUN go install github.com/rubenv/sql-migrate/...@latest
